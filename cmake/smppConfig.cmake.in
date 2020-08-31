@@ -1,0 +1,23 @@
+############################################################
+#
+#
+# Copyright (c) SMpp 2020
+#
+# AUTHOR:
+# Sylvain Prigent
+# 
+######################################################################
+## 
+### Commentary: 
+## 
+######################################################################
+## 
+### Change log:
+## 
+######################################################################
+
+set(smpp_INCLUDE_DIRS "@smpp_INCLUDE_DIR@")
+set(smpp_LIBRARY_DIRS "@smpp_LIBRARY_DIR@")
+set(smpp_CMAKE_DIR   "@smpp_CMAKE_DIR@")
+
+set(smpp_USE_FILE "@smpp_USE_FILE@")

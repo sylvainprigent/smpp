@@ -1,0 +1,31 @@
+############################################################
+#
+#
+# Copyright (c) SMpp 2020
+#
+# AUTHOR:
+# Sylvain Prigent 
+# 
+######################################################################
+## 
+### Commentary: 
+## 
+######################################################################
+## 
+### Change log:
+## 
+######################################################################
+
+if(NOT smpp_USE_FILE_INCLUDED)
+
+   set(smpp_USE_FILE_INCLUDED 1)
+
+   include_directories(${smpp_INCLUDE_DIRS})
+
+   link_directories(${smpp_LIBRARY_DIRS})
+
+   set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${smpp_CMAKE_DIR})
+
+   include(smppDependencies)
+   
+endif(NOT smpp_USE_FILE_INCLUDED)
