@@ -16,13 +16,16 @@ public:
     void set_sx(const unsigned int & value);
     void set_sy(const unsigned int & value);
     void set_buffer(float* buffer);
+    void set_color(bool value);
 public:
     unsigned int sx();
     unsigned int sy();
     float* buffer();
+    bool is_color();
 
 protected:
     unsigned int m_sx;
     unsigned int m_sy;
     float* m_buffer;        
+    bool m_is_color;
 };

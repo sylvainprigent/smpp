@@ -17,28 +17,40 @@ project(smpp)
 
 SET(SRC_FILES
   MppAlgorithm2D.cpp
+  MppAlgorithm2DSBCR.cpp
+  MppColor.cpp
   MppDataTerm2D.cpp
+  MppDataTerm2DBhattacharyya.cpp
   MppDictionary2D.cpp
   MppDictionary2DCircle.cpp
+  MppDraw2D.cpp
   MppInteraction2D.cpp
   MppInteraction2DNoOverlap.cpp
   MppPoint.cpp
+  MppRand.cpp
   MppShape2D.cpp
   MppShapeCircle.cpp
   MppSilhouette2D.cpp
+  SImage2D.cpp
 )
 
 SET(HEADERS_FILES
   MppAlgorithm2D.h
+  MppAlgorithm2DSBCR.h
+  MppColor.h
   MppDataTerm2D.h
+  MppDataTerm2DBhattacharyya.h
   MppDictionary2D.h
   MppDictionary2DCircle.h
+  MppDraw2D.h
   MppInteraction2D.h
   MppInteraction2DNoOverlap.h
   MppPoint.h
+  MppRand.h
   MppShape2D.h
   MppShapeCircle.h
   MppSilhouette2D.h
+  SImage2D.h
 )
   
 ## #################################################################

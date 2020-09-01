@@ -2,7 +2,7 @@
 /// \brief MppInteraction2D class
 /// \author Sylvain Prigent
 /// \version 0.1
-/// \date 2018
+/// \date 2020
 
 #pragma once
 

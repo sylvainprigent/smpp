@@ -15,16 +15,18 @@
 class SMPP_EXPORT MppDataTerm2D{
 
 public:
-    MppDataTerm2D();
-    MppDataTerm2D(SImage2D* image);
+    MppDataTerm2D(float threshold);
+    MppDataTerm2D(SImage2D* image, float threshold);
     virtual ~MppDataTerm2D();
 
 public:
     void set_image(SImage2D* image);
+    SImage2D* image();
 
 public:
-    virtual float run(MppShape2D* shape1, int x1, int y1, MppShape2D* shape2, int x2, int y2) = 0;
+    virtual float run(MppShape2D* shape, int x, int y) = 0;
 
 protected:
     SImage2D* m_image;
+    float m_threshold;
 };
