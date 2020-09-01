@@ -14,7 +14,7 @@
 cmake_minimum_required(VERSION 3.8)
 cmake_policy(VERSION 3.8)
 
-project(SMpp VERSION 0.0.1)
+project(smpp VERSION 0.0.1)
 
 set(${PROJECT_NAME}_VERSION_MAJOR 0 CACHE STRING "smpp major version number." FORCE)
 set(${PROJECT_NAME}_VERSION_MINOR 0 CACHE STRING "smpp minor version number." FORCE)
