@@ -8,7 +8,7 @@
 
 #include "smppExport.h"
 #include "MppShape2D.h"
-#include "SImage2D.h"
+#include "SImage.h"
 
 /// \class MppDataTerm2D
 /// \brief Interface for MPP data term in 2D
@@ -16,17 +16,17 @@ class SMPP_EXPORT MppDataTerm2D{
 
 public:
     MppDataTerm2D(float threshold);
-    MppDataTerm2D(SImage2D* image, float threshold);
+    MppDataTerm2D(SImageFloat* image, float threshold);
     virtual ~MppDataTerm2D();
 
 public:
-    void set_image(SImage2D* image);
-    SImage2D* image();
+    void set_image(SImageFloat* image);
+    SImageFloat* image();
 
 public:
     virtual float run(MppShape2D* shape, int x, int y) = 0;
 
 protected:
-    SImage2D* m_image;
+    SImageFloat* m_image;
     float m_threshold;
 };

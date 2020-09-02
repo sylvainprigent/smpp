@@ -7,6 +7,8 @@
 #include "MppAlgorithm2DSBCR.h"
 #include "MppRand.h"
 
+#include <iostream>
+
 MppAlgorithm2DSBCR::MppAlgorithm2DSBCR(MppDataTerm2D* data_term, MppInteraction2D* interaction, MppDictionary2D* dictionary)
 : MppAlgorithm2D(data_term, interaction, dictionary)
 {
@@ -42,25 +44,34 @@ void MppAlgorithm2DSBCR::run()
     float inter_val;
     float interaction_dterm;
     m_config.clear();
+    m_config_dataterm.clear();
     std::vector<int> interactions_idxs;
+    bool found_interaction;
 
     while (n < m_n_iter){
+
+        //std::cout << "iter = " << n << std::endl;
         this->generate_candidate(cx, cy, cd);
         data_term = this->m_data_term->run((*m_dictionary)[cd], cx, cy);
-
+        //if (data_term <= 0){
+        //    std::cout << "generated shape:" << cx << ", " << cy << ", " << cd << ", data term:" << data_term << std::endl;
+        //}
         interaction_dterm = 0.0;
+        found_interaction = false;
         if (data_term < 0){
             // search conflicts
             interactions_idxs.clear();
             for (int s = 0 ; s < m_config.size() ; s++){
                 inter_val = this->m_interaction->run((*m_dictionary)[m_config[s][0]], m_config[s][1], m_config[s][2], (*m_dictionary)[cd], cx, cy);
                 if (inter_val < 0){
+                    //std::cout << "found interaction " << m_config[s][1] << ", " << m_config[s][2] << " and " << cx << ", " << cy << std::endl;
+                    found_interaction = true;
                     interactions_idxs.push_back(s);
                     interaction_dterm +=  m_config_dataterm[s];       
                 }    
             }
             // add shape
-            if (interaction_dterm < 0.00001){
+            if (!found_interaction){
                 int* shape = new int[3];
                 shape[0] = cd;
                 shape[1] = cx;
@@ -73,8 +84,8 @@ void MppAlgorithm2DSBCR::run()
                 if ( data_term < interaction_dterm){
                     // remove conflicted shapes
                     for (int s = interactions_idxs.size()-1 ; s >= 0 ; s--){
-                        m_config.erase(m_config.begin()+s);  
-                        m_config_dataterm.erase(m_config_dataterm.begin()+s);  
+                        m_config.erase(m_config.begin()+interactions_idxs[s]);  
+                        m_config_dataterm.erase(m_config_dataterm.begin()+interactions_idxs[s]);  
                     }
                     // add new shape
                     int* shape = new int[3];
@@ -86,8 +97,10 @@ void MppAlgorithm2DSBCR::run()
                 }
             }
         }
+        n++;
     }
     // create the final shape list
+    std::cout << "found " << m_config.size() << " shapes" << std::endl;
     m_shapes.resize(m_config.size());
     for (int i = 0 ; i < m_config.size() ; i++){
         MppShape2D* shape = (*m_dictionary)[m_config[i][0]]->copy();

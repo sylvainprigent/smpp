@@ -22,7 +22,7 @@ MppShape2D::~MppShape2D(){
 
 int* MppShape2D::bounding_box(bool forceComputation){
 
-    if (m_bounding_box != nullptr && !forceComputation){
+    if (m_bounding_box && !forceComputation){
         return m_bounding_box;
     }
     else{
@@ -44,7 +44,7 @@ int MppShape2D::size(bool forceComputation){
 
 std::vector<MppPoint2D*>* MppShape2D::contour(bool forceComputation){
 
-    if (m_contour != nullptr && !forceComputation){
+    if (m_contour && !forceComputation){
         return m_contour;
     }
     else{
@@ -55,7 +55,7 @@ std::vector<MppPoint2D*>* MppShape2D::contour(bool forceComputation){
 
 std::vector<MppPoint2D*>* MppShape2D::fill(bool forceComputation){
 
-    if (m_fill != nullptr && !forceComputation){
+    if (m_fill && !forceComputation){
         return m_fill;
     }
     else{
@@ -66,7 +66,7 @@ std::vector<MppPoint2D*>* MppShape2D::fill(bool forceComputation){
 
 MppSilhouette2D* MppShape2D::silhouette(bool forceComputation){
 
-    if (m_silhouette != nullptr && !forceComputation){
+    if (m_silhouette && !forceComputation){
         return m_silhouette;
     }
     else{

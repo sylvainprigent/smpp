@@ -7,18 +7,18 @@
 #pragma once
 
 #include "MppShape2D.h"
-#include "SImage2D.h"
+#include "SImage.h"
 
-/// \class MppDraw
+/// \class MppDraw2D
 /// \brief Draw shapes on an image
 class MppDraw2D{
 
 public:
-    MppDraw2D(SImage2D* image);
+    MppDraw2D(SImageFloat* image);
 
 public:
-    SImage2D* run(std::vector<MppShape2D*>* shapes);
+    SImageChar* run(const std::vector<MppShape2D*>& shapes);
 
 protected:
-    SImage2D* m_image;
+    SImageFloat* m_image;
 };

@@ -12,7 +12,7 @@ MppDataTerm2D::MppDataTerm2D(float threshold){
     m_threshold = threshold;
 }
 
-MppDataTerm2D::MppDataTerm2D(SImage2D* image, float threshold){
+MppDataTerm2D::MppDataTerm2D(SImageFloat* image, float threshold){
     m_image = image;
     m_threshold = threshold;
 }
@@ -21,10 +21,10 @@ MppDataTerm2D::~MppDataTerm2D(){
 
 }
 
-SImage2D* MppDataTerm2D::image(){
+SImageFloat* MppDataTerm2D::image(){
     return m_image;
 }
 
-void MppDataTerm2D::set_image(SImage2D* image){
+void MppDataTerm2D::set_image(SImageFloat* image){
     m_image = image;
 }

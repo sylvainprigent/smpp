@@ -4,7 +4,11 @@
 /// \version 0.1
 /// \date 2018
 
+#include "math.h"
+#include <iostream>
+
 #include "MppInteraction2DNoOverlap.h"
+#include "MppShapeCircle.h"
 
 MppInteraction2DNoOverlap::MppInteraction2DNoOverlap(){
     m_percentage = 0.0;
@@ -19,6 +23,16 @@ MppInteraction2DNoOverlap::~MppInteraction2DNoOverlap(){
 }
 
 float MppInteraction2DNoOverlap::run(MppShape2D* shape1, int x1, int y1, MppShape2D* shape2, int x2, int y2){
+
+    if (dynamic_cast<MppShapeCircle*>(shape1) && dynamic_cast<MppShapeCircle*>(shape2)){
+
+        if (pow(x1-x2,2)+pow(y1-y2,2) <= pow(dynamic_cast<MppShapeCircle*>(shape1)->r()+dynamic_cast<MppShapeCircle*>(shape2)->r()+1,2)){
+            return -10;
+        }
+        return 0;
+    }
+
+    std::cout << "shapes are not recoginzed as circle" << std::endl;
 
     if (is_overlapping_2d(shape1->silhouette(), x1, y1, shape2->silhouette(), x2, y2, m_percentage)){
         return -10;

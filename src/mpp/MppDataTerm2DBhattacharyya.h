@@ -15,7 +15,7 @@ class SMPP_EXPORT MppDataTerm2DBhattacharyya : public MppDataTerm2D{
 
 public:
     MppDataTerm2DBhattacharyya(float threshold);
-    MppDataTerm2DBhattacharyya(SImage2D* image, float threshold);
+    MppDataTerm2DBhattacharyya(SImageFloat* image, float threshold);
     virtual ~MppDataTerm2DBhattacharyya();
 
 public:
