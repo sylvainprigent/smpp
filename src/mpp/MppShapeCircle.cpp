@@ -6,6 +6,7 @@
 
 #include "MppShapeCircle.h"
 #include <iostream>
+#include <algorithm>
 
 MppShapeCircle::MppShapeCircle(){
 

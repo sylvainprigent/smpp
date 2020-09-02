@@ -31,7 +31,7 @@ SET(SRC_FILES
   MppShape2D.cpp
   MppShapeCircle.cpp
   MppSilhouette2D.cpp
-  Simage2D.cpp
+  SImage2D.cpp
 )
 
 SET(HEADERS_FILES
@@ -50,7 +50,7 @@ SET(HEADERS_FILES
   MppShape2D.h
   MppShapeCircle.h
   MppSilhouette2D.h
-  Simage2D.h
+  SImage2D.h
 )
   
 ## #################################################################
