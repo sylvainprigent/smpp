@@ -22,7 +22,7 @@ public:
     /// \brief Does the drawing
     /// \param[in] shapes List of shapes to draw in the image
     /// \returns a pointer to a RGB 2D image with the shapes drew on it 
-    MppImageChar* run(const std::vector<MppShape2D*>& shapes);
+    MppImageUInt* run(const std::vector<MppShape2D*>& shapes);
 
 protected:
     MppImageFloat* m_image; ///< Pointer to the input image

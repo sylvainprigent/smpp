@@ -116,12 +116,12 @@ protected:
 
 
 /// \class MppImage
-/// \brief Container for a char image
-class SMPP_EXPORT MppImageChar : public MppImage{
+/// \brief Container for a uint image
+class SMPP_EXPORT MppImageUInt : public MppImage{
 
 public:
     /// \brief Constructor
-    MppImageChar();
+    MppImageUInt();
     /// \brief Constructor
     /// \param[in] buffer Pointer to the array containinf the data
     /// \param[in] sx Size in the X direction
@@ -129,9 +129,9 @@ public:
     /// \param[in] sz Size in the Z direction
     /// \param[in] st Number of time frames
     /// \param[in] sc Number of channels
-    MppImageChar(char* buffer, const unsigned int & sx, const unsigned int & sy, const unsigned int & sz=1, const unsigned int & st=1, const unsigned int & sc=1);
+    MppImageUInt(unsigned int* buffer, const unsigned int & sx, const unsigned int & sy, const unsigned int & sz=1, const unsigned int & st=1, const unsigned int & sc=1);
     /// \brief Destructor
-    ~MppImageChar();
+    ~MppImageUInt();
 
 public:
     /// \brief Allocate the memory
@@ -140,20 +140,56 @@ public:
 public:
     /// \brief Setter for the data buffer
     /// \param[in] buffer Pointer to the data array
-    void set_buffer(char* buffer);
+    void set_buffer(unsigned int* buffer);
 
 public:
     /// \brief Getter for the buffer
     /// \returns a pointer to the data array
-    char* buffer();
+    unsigned int* buffer();
 
 protected:
-    char* m_buffer; ///< Data array
+    unsigned int* m_buffer; ///< Data array
 };
 
 
-/// \class MppImage
-/// \brief Container for a char image
+class SMPP_EXPORT MppImageInt : public MppImage{
+
+public:
+    /// \brief Contructor
+    MppImageInt();
+    /// \brief Constructor
+    /// \param[in] buffer Pointer to the array containinf the data
+    /// \param[in] sx Size in the X direction
+    /// \param[in] sy Size in the Y direction
+    /// \param[in] sz Size in the Z direction
+    /// \param[in] st Number of time frames
+    /// \param[in] sc Number of channels
+    MppImageInt(int* buffer, const unsigned int & sx, const unsigned int & sy, const unsigned int & sz=1, const unsigned int & st=1, const unsigned int & sc=1);
+    /// \brief Destructor    
+    ~MppImageInt();
+
+public:
+    /// \brief Allocate the buffer memory
+    void allocate();
+
+public:
+    /// \brief Setter for the buffer
+    /// \param[in] buffer Pointer to the buffer data array
+    void set_buffer(int* buffer);
+
+public:
+    /// \brief Getter fot the buffer
+    /// \returns a Pointer to the data buffer
+    int* buffer();
+
+protected:
+    int* m_buffer; ///< Pointer to the data buffer
+    
+};
+
+
+/// \class MppImageFloat
+/// \brief Container for a float image
 class SMPP_EXPORT MppImageFloat : public MppImage{
 
 public:
@@ -186,40 +222,4 @@ public:
 
 protected:
     float* m_buffer; ///< Pointer to the data buffer
-};
-
-
-class SMPP_EXPORT MppImageInt : public MppImage{
-
-public:
-    /// \brief Contructor
-    MppImageInt();
-    /// \brief Constructor
-    /// \param[in] buffer Pointer to the array containinf the data
-    /// \param[in] sx Size in the X direction
-    /// \param[in] sy Size in the Y direction
-    /// \param[in] sz Size in the Z direction
-    /// \param[in] st Number of time frames
-    /// \param[in] sc Number of channels
-    MppImageInt(unsigned int* buffer, const unsigned int & sx, const unsigned int & sy, const unsigned int & sz=1, const unsigned int & st=1, const unsigned int & sc=1);
-    /// \brief Destructor    
-    ~MppImageInt();
-
-public:
-    /// \brief Allocate the buffer memory
-    void allocate();
-
-public:
-    /// \brief Setter for the buffer
-    /// \param[in] buffer Pointer to the buffer data array
-    void set_buffer(unsigned int* buffer);
-
-public:
-    /// \brief Getter fot the buffer
-    /// \returns a Pointer to the data buffer
-    unsigned int* buffer();
-
-protected:
-    unsigned int* m_buffer; ///< Pointer to the data buffer
-
 };

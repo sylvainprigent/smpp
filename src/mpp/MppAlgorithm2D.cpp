@@ -14,6 +14,7 @@ MppAlgorithm2D::MppAlgorithm2D(MppDataTerm2D* data_term, MppInteraction2D* inter
     m_interaction = interaction;
     dictionary->run();
     m_dictionary = dictionary->dictionary();
+    m_use_mask = false;
 }
 
 MppAlgorithm2D::MppAlgorithm2D(MppDataTerm2D* data_term, MppInteraction2D* interaction, std::vector<MppShape2D*>* dictionary)
@@ -21,11 +22,27 @@ MppAlgorithm2D::MppAlgorithm2D(MppDataTerm2D* data_term, MppInteraction2D* inter
     m_data_term = data_term;
     m_interaction = interaction;
     m_dictionary = dictionary;
+    m_use_mask = false;
 }
 
 MppAlgorithm2D::~MppAlgorithm2D()
 {
+    for (int i = 0 ; i < m_birth_mask.size() ; i++){
+        delete m_birth_mask[i];
+    }
+}
 
+void MppAlgorithm2D::set_birth_mask(MppImageUInt* mask){
+    m_use_mask = true;
+    unsigned int* buffer = mask->buffer();
+    m_birth_mask.clear();
+    for (int x = 0 ; x < mask->sx() ; x++){
+        for (int y = 0 ; y < mask->sy() ; y++){
+            if (buffer[mask->sy()*x+y] == 255){
+                m_birth_mask.push_back(new MppPoint2D(x, y));        
+            }
+        }
+    }
 }
 
 std::vector<MppShape2D*> MppAlgorithm2D::shapes()

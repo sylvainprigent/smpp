@@ -34,6 +34,12 @@ public:
     virtual ~MppAlgorithm2D();
 
 public:
+    /// \brief Setter for birth mask optional parameter.
+    ///  if the birth mask is set, objects can be created only at locations where mask=255
+    /// \param[in] mask Pointer to the mask image
+    void set_birth_mask(MppImageUInt* mask);
+
+public:
     /// \brief Method that implement shape detection algorithm
     virtual void run() = 0;
 
@@ -47,6 +53,10 @@ protected:
     MppDataTerm2D* m_data_term; ///< Pointer to the data term object
     MppInteraction2D* m_interaction; ///< Pointer to the interaction object 
     std::vector<MppShape2D*>* m_dictionary; ///< Pointer to the shapes dictionary
+
+    // optional input
+    std::vector<MppPoint2D*> m_birth_mask;
+    bool m_use_mask;
 
     // output
     std::vector<MppShape2D*> m_shapes; ///< List of detected shapes

@@ -4,6 +4,7 @@
 /// \version 0.1
 /// \date 2020
 
+
 #include "MppImage.h"
 
 MppImage::MppImage(){
@@ -115,7 +116,7 @@ void MppImage::set_unit(std::string value){
 }
 
 
-MppImageChar::MppImageChar() : MppImage(){
+MppImageUInt::MppImageUInt() : MppImage(){
     m_buffer = nullptr;
     m_sx = 0;
     m_sy = 0;
@@ -125,7 +126,7 @@ MppImageChar::MppImageChar() : MppImage(){
     m_precision = 8; 
 }
 
-MppImageChar::MppImageChar(char* buffer, const unsigned int & sx, const unsigned int & sy, const unsigned int & sz, const unsigned int & st, const unsigned int & sc)
+MppImageUInt::MppImageUInt(unsigned int* buffer, const unsigned int & sx, const unsigned int & sy, const unsigned int & sz, const unsigned int & st, const unsigned int & sc)
  : MppImage()
  {
     m_buffer = buffer;
@@ -137,21 +138,24 @@ MppImageChar::MppImageChar(char* buffer, const unsigned int & sx, const unsigned
     m_precision = 8; 
 }
 
-MppImageChar::~MppImageChar(){
-    delete[] m_buffer;
+MppImageUInt::~MppImageUInt(){
+    if (m_buffer){
+        delete[] m_buffer;
+    }
 }
 
-void MppImageChar::allocate(){
-    m_buffer = new char[m_sx*m_sy*m_sz*m_st*m_sc];    
+void MppImageUInt::allocate(){
+    m_buffer = new unsigned int[m_sx*m_sy*m_sz*m_st*m_sc];    
 }
 
-void MppImageChar::set_buffer(char* buffer){
+void MppImageUInt::set_buffer(unsigned int* buffer){
     m_buffer = buffer;
 }
 
-char* MppImageChar::buffer(){
+unsigned int* MppImageUInt::buffer(){
     return m_buffer;
 }
+
 
 MppImageFloat::MppImageFloat() : MppImage(){
     m_buffer = nullptr;
@@ -176,7 +180,9 @@ MppImageFloat::MppImageFloat(float* buffer, const unsigned int & sx, const unsig
 }
 
 MppImageFloat::~MppImageFloat(){
-    delete[] m_buffer;
+    if (m_buffer){
+        delete[] m_buffer;
+    }
 }
 
 void MppImageFloat::allocate(){
@@ -202,7 +208,7 @@ MppImageInt::MppImageInt() : MppImage(){
     m_precision = 16; 
 }
 
-MppImageInt::MppImageInt(unsigned int* buffer, const unsigned int & sx, const unsigned int & sy, const unsigned int & sz, const unsigned int & st, const unsigned int & sc)
+MppImageInt::MppImageInt(int* buffer, const unsigned int & sx, const unsigned int & sy, const unsigned int & sz, const unsigned int & st, const unsigned int & sc)
  : MppImage()
  {
     m_buffer = buffer;
@@ -215,17 +221,19 @@ MppImageInt::MppImageInt(unsigned int* buffer, const unsigned int & sx, const un
 }
 
 MppImageInt::~MppImageInt(){
-    delete[] m_buffer;
+    if (m_buffer){
+        delete[] m_buffer;
+    }
 }
 
 void MppImageInt::allocate(){
-    m_buffer = new unsigned int[m_sx*m_sy*m_sz*m_st*m_sc];    
+    m_buffer = new int[m_sx*m_sy*m_sz*m_st*m_sc];    
 }
 
-void MppImageInt::set_buffer(unsigned int* buffer){
+void MppImageInt::set_buffer(int* buffer){
     m_buffer = buffer;
 }
 
-unsigned int* MppImageInt::buffer(){
+int* MppImageInt::buffer(){
     return m_buffer;
 }
