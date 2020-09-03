@@ -14,14 +14,21 @@
 class SMPP_EXPORT MppDictionary2DCircle : public MppDictionary2D{
 
 public:
-    MppDictionary2DCircle(unsigned int min_r, unsigned int max_r);
+    /// \brief Constructor
+    /// \param[in] min_r Minimum radius of the circles in the dictionary
+    /// \param[in] max_r Maximim radius of the circles in the dicitonary
+    /// \param[in] step Step of possible radii between min_r and max_r 
+    MppDictionary2DCircle(unsigned int min_r, unsigned int max_r, unsigned int step = 1);
+    /// \brief Destructor
     virtual ~MppDictionary2DCircle();
 
 public:
+    /// \brief Method that implement dictionary build
     void run();
 
 protected:
-    unsigned int m_min_r;
-    unsigned int m_max_r;
+    unsigned int m_min_r; ///< Minimum radius of the circles in the dictionary
+    unsigned int m_max_r; ///< Maximim radius of the circles in the dictionary
+    unsigned int m_step; ///< Step of possible radii between min_r and max_r 
 
 };

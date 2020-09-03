@@ -8,7 +8,7 @@
 
 #include "smppExport.h"
 
-/// \class blRandomGeneratorPM
+/// \class MppRandPM
 /// \brief “Minimal” random number generator of Park and Miller. Returns a uniform random deviate
 /// between 0.0 and 1.0. Set or reset idum to any integer value (except the unlikely value MASK)
 /// to initialize the sequence; idum must not be altered between calls for successive deviates in
@@ -16,7 +16,6 @@
 /// The period is 2^31-2 = 2.0*10^9
 class SMPP_EXPORT MppRandPM
 {
-
 private:
     static long m_seed; ///< seed of the random generator
 
@@ -27,4 +26,5 @@ public:
     /// \fn static void srand(long seed);
     /// \brief set the seed of the random generator
     static void srand(long seed);
+
 };

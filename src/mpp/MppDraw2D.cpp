@@ -11,11 +11,11 @@
 
 #include <iostream>
 
-MppDraw2D::MppDraw2D(SImageFloat* image){
+MppDraw2D::MppDraw2D(MppImageFloat* image){
     m_image = image;
 }
 
-SImageChar* MppDraw2D::run(const std::vector<MppShape2D*>& shapes){
+MppImageChar* MppDraw2D::run(const std::vector<MppShape2D*>& shapes){
 
     std::cout << "draw shapes starts" << std::endl;
     // create a 3D image
@@ -50,7 +50,7 @@ SImageChar* MppDraw2D::run(const std::vector<MppShape2D*>& shapes){
             out_buffer[3*pos+2] = color[2];
         }
     }
-    SImageChar* out_image = new SImageChar(out_buffer, m_image->sx(), m_image->sy(), 1, 1, 3);
+    MppImageChar* out_image = new MppImageChar(out_buffer, m_image->sx(), m_image->sy(), 1, 1, 3);
     std::cout << "draw shapes end" << std::endl;
     return out_image;
 }

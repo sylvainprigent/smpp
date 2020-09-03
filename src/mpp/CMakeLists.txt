@@ -24,6 +24,7 @@ SET(SRC_FILES
   MppDictionary2D.cpp
   MppDictionary2DCircle.cpp
   MppDraw2D.cpp
+  MppImage.cpp
   MppInteraction2D.cpp
   MppInteraction2DNoOverlap.cpp
   MppPoint.cpp
@@ -31,7 +32,6 @@ SET(SRC_FILES
   MppShape2D.cpp
   MppShapeCircle.cpp
   MppSilhouette2D.cpp
-  SImage.cpp
 )
 
 SET(HEADERS_FILES
@@ -43,6 +43,7 @@ SET(HEADERS_FILES
   MppDictionary2D.h
   MppDictionary2DCircle.h
   MppDraw2D.h
+  MppImage.h
   MppInteraction2D.h
   MppInteraction2DNoOverlap.h
   MppPoint.h
@@ -50,7 +51,6 @@ SET(HEADERS_FILES
   MppShape2D.h
   MppShapeCircle.h
   MppSilhouette2D.h
-  SImage.h
 )
   
 ## #################################################################

@@ -16,15 +16,20 @@
 class SMPP_EXPORT MppDictionary2D{
 
 public:
+    /// \brief Constructor
     MppDictionary2D();
+    /// \brief Destructor
     virtual ~MppDictionary2D();
 
 public:
+    /// \brief Method that implement dictionary build
     virtual void run() = 0;
 
 public:
+    /// \brief Getter for the dictionary
+    /// \returns a pointer to the list of shapes
     std::vector<MppShape2D*>* dictionary();
 
 protected:
-    std::vector<MppShape2D*>* m_dictionary;
+    std::vector<MppShape2D*>* m_dictionary; ///< the dictionary is a list of shapes
 };

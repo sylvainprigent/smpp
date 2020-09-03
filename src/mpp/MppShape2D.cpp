@@ -8,7 +8,6 @@
 #include <iostream>
 
 MppShape2D::MppShape2D(){
-    m_name = "MppShape2D";
     m_bounding_box = nullptr; 
     m_size = -1;
     m_contour = nullptr;

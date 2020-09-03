@@ -14,13 +14,13 @@
 class SMPP_EXPORT MppColor{
 
 public:
-    /// \fn static std::vector<int> rand_rgb();
+    /// \brief Generate a random RGB color
     /// \return a random RGB color
     static std::vector<int> rand_rgb();
-    /// \fn static std::vector<int> hsv_to_rgb(float h, float s, float v);
     /// \brief Convert an HSV color into an RGB color
     /// \param[in] h H value
     /// \param[in] s S value
     /// \param[in] v V value
+    /// \returns the vector containing the 3 RGB components
     static std::vector<int> hsv_to_rgb(float h, float s, float v);
 };

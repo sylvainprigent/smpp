@@ -8,9 +8,10 @@
 #include "MppShapeCircle.h"
 
 
-MppDictionary2DCircle::MppDictionary2DCircle(unsigned int min_r, unsigned int max_r){
+MppDictionary2DCircle::MppDictionary2DCircle(unsigned int min_r, unsigned int max_r, unsigned int step){
     m_min_r = min_r;
     m_max_r = max_r;
+    m_step = step;
 }
 
 MppDictionary2DCircle::~MppDictionary2DCircle(){
@@ -20,7 +21,7 @@ MppDictionary2DCircle::~MppDictionary2DCircle(){
 void MppDictionary2DCircle::run()
 {
     m_dictionary = new std::vector<MppShape2D*>(m_max_r-m_min_r+1);
-    for (int r = m_min_r ; r <= m_max_r ; r++){
+    for (int r = m_min_r ; r <= m_max_r ; r += m_step){
         (*m_dictionary)[r-m_min_r] = new MppShapeCircle(0, 0, r);
     }
 }

@@ -5,6 +5,7 @@
 #include "../src/mpp/MppDictionary2D.h"
 #include "../src/mpp/MppDictionary2DCircle.h"
 #include "../src/mpp/MppDraw2D.h"
+#include "../src/mpp/MppImage.h"
 #include "../src/mpp/MppInteraction2D.h"
 #include "../src/mpp/MppInteraction2DNoOverlap.h"
 #include "../src/mpp/MppRand.h"

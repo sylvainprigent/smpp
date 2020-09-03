@@ -14,13 +14,21 @@ MppDataTerm2DBhattacharyya::MppDataTerm2DBhattacharyya(float threshold) : MppDat
     m_width = 1;
 }
 
-MppDataTerm2DBhattacharyya::MppDataTerm2DBhattacharyya(SImageFloat* image, float threshold) : MppDataTerm2D(image, threshold){
+MppDataTerm2DBhattacharyya::MppDataTerm2DBhattacharyya(MppImageFloat* image, float threshold) : MppDataTerm2D(image, threshold){
     m_max_distance = 100.0; 
     m_width = 1;    
 }
 
 MppDataTerm2DBhattacharyya::~MppDataTerm2DBhattacharyya(){
 
+}
+
+void MppDataTerm2DBhattacharyya::set_max_distance(float value){
+    m_max_distance = value;   
+}
+
+void MppDataTerm2DBhattacharyya::set_width(int value){
+    m_width = value;   
 }
 
 float MppDataTerm2DBhattacharyya::run(MppShape2D* shape, int x, int y){

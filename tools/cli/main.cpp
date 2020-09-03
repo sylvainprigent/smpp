@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     {
         std::cout << "Hello MPP" << std::endl;
 
-        SImageFloat* image = dynamic_cast<SImageFloat*>(SImageReader::read("/home/sprigent/Documents/code/tracks1/track1_t003.tif"));
+        SImageFloat* image = dynamic_cast<SImageFloat*>(SImageReader::read("/Users/sprigent/Documents/MATLAB/syntetic_tracking/tracks1/track1_t003.tif"));
         std::cout << "image size = " << image->sx() << ", " << image->sy() << std::endl;
 
         float threshold = 9;
@@ -17,7 +17,8 @@ int main(int argc, char *argv[])
         unsigned int max_r = 4;
         int n_iter = 100000;
 
-        MppDataTerm2DBhattacharyya* data_term = new MppDataTerm2DBhattacharyya(image, threshold);
+        MppImageFloat* mpp_image = new MppImageFloat(image->buffer(), image->sx(), image->sy());
+        MppDataTerm2DBhattacharyya* data_term = new MppDataTerm2DBhattacharyya(mpp_image, threshold);
         MppInteraction2DNoOverlap* interaction = new MppInteraction2DNoOverlap();
         MppDictionary2DCircle* dictionary = new MppDictionary2DCircle(min_r, max_r);
         MppAlgorithm2DSBCR* algo = new MppAlgorithm2DSBCR(data_term, interaction, dictionary);
@@ -27,11 +28,11 @@ int main(int argc, char *argv[])
 
         std::cout << "main got " << shapes.size() << "shapes" << std::endl;
 
-        MppDraw2D drawer(image);
-        SImageChar* out_image = drawer.run(shapes);
-
+        MppDraw2D drawer(mpp_image);
+        MppImageChar* mpp_out_image = drawer.run(shapes);
+        SImageChar* out_image = new SImageChar(mpp_out_image->buffer(), mpp_out_image->sx(), mpp_out_image->sy(), 1, 1, 3);
         std::cout << "save image representation " << std::endl;
-        SImageReader::write(out_image, "/home/sprigent/Documents/code/mpp_track1_t003.tif");
+        SImageReader::write(out_image, "/Users/sprigent/Documents/code/mpp_track1_t003.tif");
 
         // delete
         delete image;
