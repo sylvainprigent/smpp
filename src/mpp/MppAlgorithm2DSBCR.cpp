@@ -84,6 +84,7 @@ void MppAlgorithm2DSBCR::run()
                 if ( data_term < interaction_dterm){
                     // remove conflicted shapes
                     for (int s = interactions_idxs.size()-1 ; s >= 0 ; s--){
+                        delete[] m_config[interactions_idxs[s]];
                         m_config.erase(m_config.begin()+interactions_idxs[s]);  
                         m_config_dataterm.erase(m_config_dataterm.begin()+interactions_idxs[s]);  
                     }
@@ -106,6 +107,9 @@ void MppAlgorithm2DSBCR::run()
         MppShape2D* shape = (*m_dictionary)[m_config[i][0]]->copy();
         shape->translate(m_config[i][1], m_config[i][2]);
         m_shapes[i] = shape;
+    }
+    for (int i = 0 ; i < m_config.size() ; i++){
+        delete[] m_config[i];
     }
 }
 

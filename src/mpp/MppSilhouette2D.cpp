@@ -51,7 +51,7 @@ MppSilhouette2D::~MppSilhouette2D(){
     }
 
     if (m_bounding_box){
-        delete m_bounding_box;
+        delete[] m_bounding_box;
     }
     if (m_contour){
         for (int i = 0 ; i < m_contour->size() ; i++){
@@ -219,7 +219,8 @@ std::vector<MppPoint2D*>* MppSilhouette2D::contour(int width, bool force_computa
                 }    
             }
         }
-    }                
+    }    
+    delete[] im;            
     return m_contour;
 
 }

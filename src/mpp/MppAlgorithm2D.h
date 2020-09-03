@@ -22,7 +22,7 @@ class SMPP_EXPORT MppAlgorithm2D{
 public:
     MppAlgorithm2D(MppDataTerm2D* data_term, MppInteraction2D* interaction, MppDictionary2D* dictionary);
     MppAlgorithm2D(MppDataTerm2D* data_term, MppInteraction2D* interaction, std::vector<MppShape2D*>* dictionary);
-    ~MppAlgorithm2D();
+    virtual ~MppAlgorithm2D();
 
 public:
     virtual void run() = 0;
@@ -38,5 +38,8 @@ protected:
 
     // output
     std::vector<MppShape2D*> m_shapes;
+
+private:
+    bool m_build_own_dict;
 
 };

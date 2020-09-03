@@ -138,7 +138,7 @@ SImageChar::SImageChar(char* buffer, const unsigned int & sx, const unsigned int
 }
 
 SImageChar::~SImageChar(){
-    delete m_buffer;
+    delete[] m_buffer;
 }
 
 void SImageChar::allocate(){
@@ -176,7 +176,7 @@ SImageFloat::SImageFloat(float* buffer, const unsigned int & sx, const unsigned 
 }
 
 SImageFloat::~SImageFloat(){
-    delete m_buffer;
+    delete[] m_buffer;
 }
 
 void SImageFloat::allocate(){
@@ -215,7 +215,7 @@ SImageInt::SImageInt(unsigned int* buffer, const unsigned int & sx, const unsign
 }
 
 SImageInt::~SImageInt(){
-    delete m_buffer;
+    delete[] m_buffer;
 }
 
 void SImageInt::allocate(){

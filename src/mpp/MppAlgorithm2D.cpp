@@ -14,15 +14,6 @@ MppAlgorithm2D::MppAlgorithm2D(MppDataTerm2D* data_term, MppInteraction2D* inter
     m_interaction = interaction;
     dictionary->run();
     m_dictionary = dictionary->dictionary();
-
-/*
-    std::cout << "dictionary size: " << m_dictionary->size() << std::endl;
-    std::cout << "ref shape box: " << m_dictionary->at(0)->bounding_box()[0] << std::endl;
-    std::cout << "ref shape box: " << m_dictionary->at(0)->bounding_box()[1] << std::endl;
-    std::cout << "ref shape box: " << m_dictionary->at(0)->bounding_box()[2] << std::endl;
-    std::cout << "ref shape box: " << m_dictionary->at(0)->bounding_box()[3] << std::endl;
-    std::cout << "ref shape contour size: " << m_dictionary->at(0)->contour()->size() << std::endl;
-    */
 }
 
 MppAlgorithm2D::MppAlgorithm2D(MppDataTerm2D* data_term, MppInteraction2D* interaction, std::vector<MppShape2D*>* dictionary)

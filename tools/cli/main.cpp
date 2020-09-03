@@ -32,7 +32,17 @@ int main(int argc, char *argv[])
 
         std::cout << "save image representation " << std::endl;
         SImageReader::write(out_image, "/home/sprigent/Documents/code/mpp_track1_t003.tif");
-        
+
+        // delete
+        delete image;
+        delete data_term;
+        delete interaction;
+        delete dictionary;
+        delete algo;
+        for (int s = 0 ; s < shapes.size() ; s++){
+            delete shapes[s];
+        }
+        delete out_image;
         return 0;
     }
     catch (std::exception &e)
