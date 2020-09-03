@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
         std::cout << "Hello MPP" << std::endl;
 
         SImageFloat* image = dynamic_cast<SImageFloat*>(SImageReader::read("/Users/sprigent/Documents/MATLAB/syntetic_tracking/tracks1/track1_t003.tif"));
-        SImageUInt* mask = dynamic_cast<SImageUInt*>(SImageReader::read("/Users/sprigent/Documents/MATLAB/syntetic_tracking/tracks1/track1_t003_mask.tif"));
+        SImageUInt* mask = dynamic_cast<SImageUInt*>(SImageReader::read("/Users/sprigent/Documents/MATLAB/syntetic_tracking/tracks1/track1_t003_mask.tif", 8));
         std::cout << "image size = " << image->sx() << ", " << image->sy() << std::endl;
         std::cout << "mask size = " << mask->sx() << ", " << mask->sy() << std::endl;
 

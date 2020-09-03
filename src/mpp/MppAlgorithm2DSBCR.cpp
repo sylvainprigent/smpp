@@ -116,15 +116,13 @@ void MppAlgorithm2DSBCR::run()
 void MppAlgorithm2DSBCR::generate_candidate(int& cx, int & cy, int & cd){
 
     if (m_use_mask){
-        std::cout << "mask rand " << std::endl;
         MppPoint2D* p = m_birth_mask[int(MppRandPM::rand()*float(m_birth_mask.size()))];
         cx = p->x();
         cy = p->y();
-        std::cout << "rand point from mask " << cx << ", " << cy << std::endl;
     }
     else{
-        cx = int( MppRandPM::rand()*float(m_image_sx));
-        cy = int( MppRandPM::rand()*float(m_image_sy));
+        cx = int(MppRandPM::rand()*float(m_image_sx));
+        cy = int(MppRandPM::rand()*float(m_image_sy));
     }
 
     // index in dictionary
