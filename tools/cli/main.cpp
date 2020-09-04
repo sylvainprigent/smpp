@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <mpp>
+#include <smpp>
 #include <simageio>
 
 int main(int argc, char *argv[])

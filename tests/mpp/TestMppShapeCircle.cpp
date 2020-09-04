@@ -1,8 +1,8 @@
 #include <vector>
 #include <iostream>
 
-#include <mpp/MppPoint.h>
-#include <mpp/MppShapeCircle.h>
+#include <smpp/MppPoint.h>
+#include <smpp/MppShapeCircle.h>
 
 bool assert_point_list_equals(std::vector<MppPoint2D*>* l1, std::vector<MppPoint2D*>* l2){
 
