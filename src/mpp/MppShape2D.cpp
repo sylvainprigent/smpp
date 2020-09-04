@@ -13,6 +13,7 @@ MppShape2D::MppShape2D(){
     m_contour = nullptr;
     m_fill = nullptr;
     m_silhouette = nullptr;
+    m_normals = nullptr;
 }
 
 MppShape2D::~MppShape2D(){

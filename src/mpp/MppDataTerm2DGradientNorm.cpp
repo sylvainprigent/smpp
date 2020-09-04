@@ -1,36 +1,38 @@
-/// \file MppDataTerm2DGradient.cpp
-/// \brief MppDataTerm2DGradient class
+/// \file MppDataTerm2DGradientNorm.cpp
+/// \brief MppDataTerm2DGradientNorm class
 /// \author Sylvain Prigent
 /// \version 0.1
 /// \date 2020
 
 #include "math.h"
-#include "MppDataTerm2DGradient.h"
+#include "MppDataTerm2DGradientNorm.h"
 
 #include <iostream>
 
-MppDataTerm2DGradient::MppDataTerm2DGradient(float threshold) : MppDataTerm2D(threshold){
+MppDataTerm2DGradientNorm::MppDataTerm2DGradientNorm(float threshold) : MppDataTerm2D(threshold){
     m_D = 100.0;
     m_grad_image_x = nullptr;
     m_grad_image_y = nullptr;
+    m_epsilon = 0.000001;
 }
 
-MppDataTerm2DGradient::MppDataTerm2DGradient(MppImageFloat* image, float threshold) : MppDataTerm2D(image, threshold){
+MppDataTerm2DGradientNorm::MppDataTerm2DGradientNorm(MppImageFloat* image, float threshold) : MppDataTerm2D(image, threshold){
     m_D = 100.0; 
     m_grad_image_x = nullptr;
-    m_grad_image_y = nullptr;   
+    m_grad_image_y = nullptr; 
+    m_epsilon = 0.000001;  
 }
 
-MppDataTerm2DGradient::~MppDataTerm2DGradient(){
+MppDataTerm2DGradientNorm::~MppDataTerm2DGradientNorm(){
     delete[] m_grad_image_x;
     delete[] m_grad_image_y;
 }
 
-void MppDataTerm2DGradient::set_D(float value){
+void MppDataTerm2DGradientNorm::set_D(float value){
     m_D = value;   
 }
 
-void MppDataTerm2DGradient::init(){
+void MppDataTerm2DGradientNorm::init(){
 
     unsigned int sx = m_image->sx();
     unsigned int sy = m_image->sy();
@@ -61,7 +63,7 @@ void MppDataTerm2DGradient::init(){
     }
 }
 
-float MppDataTerm2DGradient::run(MppShape2D* shape, int x, int y){
+float MppDataTerm2DGradientNorm::run(MppShape2D* shape, int x, int y){
 
     //std::cout << "calculate dataterm:" << x << ", " << y << std::endl;
 
@@ -87,6 +89,7 @@ float MppDataTerm2DGradient::run(MppShape2D* shape, int x, int y){
     float grad_x, grad_y;
     float nx, ny;
     int xt, yt;
+    float val, norm_coef;
     for (int p = 0 ; p < contour->size() ; ++p){
         xt = (*contour)[p]->x() + x;
         yt = (*contour)[p]->y() + y;
@@ -98,18 +101,15 @@ float MppDataTerm2DGradient::run(MppShape2D* shape, int x, int y){
         // project gradient
         nx = (*normals)[p]->x();
         ny = (*normals)[p]->y();
-        //std::cout << "nx = " << nx << "ny = " << ny << std::endl;
-        float val = nx*grad_x + ny*grad_y;
+
+        norm_coef = sqrt(grad_x*grad_x + grad_y*grad_y + m_epsilon*m_epsilon);
+        val = (nx*grad_x + ny*grad_y)/norm_coef;
 
         U += val;
     }
     U /= contour->size();
 
     // threshold
-    if (U < m_threshold){
-        return (1- U/m_threshold);
-    }
-    else{
-        return exp(-(U - m_threshold)/m_D)-1;
-    }
+    float den = m_threshold+1.0;
+    return std::min( float((U - m_threshold)/den), float(1.0) );
 }

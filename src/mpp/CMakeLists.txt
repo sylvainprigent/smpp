@@ -22,6 +22,7 @@ SET(SRC_FILES
   MppDataTerm2D.cpp
   MppDataTerm2DBhattacharyya.cpp
   MppDataTerm2DGradient.cpp
+  MppDataTerm2DGradientNorm.cpp
   MppDictionary2D.cpp
   MppDictionary2DCircle.cpp
   MppDraw2D.cpp
@@ -42,6 +43,7 @@ SET(HEADERS_FILES
   MppDataTerm2D.h
   MppDataTerm2DBhattacharyya.h
   MppDataTerm2DGradient.h
+  MppDataTerm2DGradientNorm.h
   MppDictionary2D.h
   MppDictionary2DCircle.h
   MppDraw2D.h

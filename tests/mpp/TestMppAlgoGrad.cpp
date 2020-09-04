@@ -19,10 +19,11 @@ int main(int argc, char *argv[])
         float threshold = 4;
         unsigned int min_r = 8;
         unsigned int max_r = 10;
-        int n_iter = 1000000;
+        int n_iter = 10000;
 
         MppImageFloat* mpp_image = new MppImageFloat(image->buffer(), image->sx(), image->sy());
-        MppDataTerm2DGradient* data_term = new MppDataTerm2DGradient(mpp_image, threshold);
+        //MppDataTerm2DGradient* data_term = new MppDataTerm2DGradient(mpp_image, threshold);
+        MppDataTerm2DGradientNorm* data_term = new MppDataTerm2DGradientNorm(mpp_image, threshold);
         MppInteraction2DNoOverlap* interaction = new MppInteraction2DNoOverlap();
         MppDictionary2DCircle* dictionary = new MppDictionary2DCircle(min_r, max_r);
         MppAlgorithm2DSBCR* algo = new MppAlgorithm2DSBCR(data_term, interaction, dictionary);
@@ -39,10 +40,11 @@ int main(int argc, char *argv[])
         MppImageUInt* mpp_out_image = drawer.run(shapes);
         SImageUInt* out_image = new SImageUInt(mpp_out_image->buffer(), mpp_out_image->sx(), mpp_out_image->sy(), 1, 1, 3);
         std::cout << "save image representation " << std::endl;
-        SImageReader::write(out_image, "/Users/sprigent/Documents/code/smpp/tests/mpp/imagesTest/res.tif");
+        SImageReader::write(out_image, "/home/sprigent/Documents/code/smpp/tests/mpp/imagesTest/res.tif");
 
         // delete
         delete image;
+        //delete mpp_image;
         delete data_term;
         delete interaction;
         delete dictionary;
@@ -51,6 +53,7 @@ int main(int argc, char *argv[])
             delete shapes[s];
         }
         delete out_image;
+        //delete mpp_out_image;
         return 0;
     }
     catch (std::exception &e)

@@ -44,6 +44,7 @@ MppSilhouette2D::MppSilhouette2D(){
     m_size = -1;
     m_contour = nullptr;
     m_fill = nullptr;
+    m_normals = nullptr;
 }
 
 MppSilhouette2D::~MppSilhouette2D(){
@@ -65,6 +66,12 @@ MppSilhouette2D::~MppSilhouette2D(){
             delete (*m_fill)[i];
         }
         delete m_fill;
+    }
+    if (m_normals){
+        for (int i = 0 ; i < m_normals->size() ; i++){
+            delete (*m_normals)[i];
+        }
+        delete m_normals;
     }
 }
 
@@ -262,7 +269,7 @@ std::vector<MppPoint2D*>* MppSilhouette2D::normals(bool force_computation){
         return m_normals;
     }
 
-    this->contour(1, true);
+    this->contour(1);
     m_normals = new std::vector<MppPoint2D*>(m_contour->size());
     for (int i = 0 ; i < m_contour->size() ; ++i){
 

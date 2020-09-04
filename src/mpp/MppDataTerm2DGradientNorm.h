@@ -1,5 +1,5 @@
-/// \file MppDataTerm2DGradient.h
-/// \brief MppDataTerm2DGradient class
+/// \file MppDataTerm2DGradientNorm.h
+/// \brief MppDataTerm2DGradientNorm class
 /// \author Sylvain Prigent
 /// \version 0.1
 /// \date 2020
@@ -9,20 +9,20 @@
 #include "smppExport.h"
 #include "MppDataTerm2D.h"
 
-/// \class MppDataTerm2DGradient
+/// \class MppDataTerm2DGradientNorm
 /// \brief Define a data term as the gradient around the shape
-class SMPP_EXPORT MppDataTerm2DGradient : public MppDataTerm2D{
+class SMPP_EXPORT MppDataTerm2DGradientNorm : public MppDataTerm2D{
 
 public:
     /// \brief Constructor
     /// \param[in] threshold Threshold to select if the data term is heigh enough to keep the shape
-    MppDataTerm2DGradient(float threshold);
+    MppDataTerm2DGradientNorm(float threshold);
     /// \brief Constructor
     /// \param[in] image Image where the data term is calculated
     /// \param[in] threshold Threshold to select if the data term is heigh enough to keep the shape
-    MppDataTerm2DGradient(MppImageFloat* image, float threshold);
+    MppDataTerm2DGradientNorm(MppImageFloat* image, float threshold);
     /// \brief Destructor
-    virtual ~MppDataTerm2DGradient();
+    virtual ~MppDataTerm2DGradientNorm();
 
 public:
     /// \brief Implements precalculation needed for the data term
@@ -45,4 +45,5 @@ protected:
     float m_D; ///< Slope of the curve to transforme the distance to [-1 1]
     float* m_grad_image_x; ///< Image containing the gradient of the original image in x direction
     float* m_grad_image_y; ///< Image containing the gradient of the original image in y direction
+    float m_epsilon; ///< normalisation epsilon
 };

@@ -15,6 +15,7 @@ MppAlgorithm2D::MppAlgorithm2D(MppDataTerm2D* data_term, MppInteraction2D* inter
     dictionary->run();
     m_dictionary = dictionary->dictionary();
     m_use_mask = false;
+    m_data_term->init();
 }
 
 MppAlgorithm2D::MppAlgorithm2D(MppDataTerm2D* data_term, MppInteraction2D* interaction, std::vector<MppShape2D*>* dictionary)
@@ -23,6 +24,7 @@ MppAlgorithm2D::MppAlgorithm2D(MppDataTerm2D* data_term, MppInteraction2D* inter
     m_interaction = interaction;
     m_dictionary = dictionary;
     m_use_mask = false;
+    m_data_term->init();
 }
 
 MppAlgorithm2D::~MppAlgorithm2D()

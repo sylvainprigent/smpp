@@ -34,6 +34,8 @@ public:
     MppImageFloat* image();
 
 public:
+    /// \brief Implements precalculation needed for the data term
+    virtual void init() = 0;
     /// \brief Method that implement the data term calculation
     /// a data term must be in [-1 1]. A good shape have a data term in [-1 0[ where the best shapes have a dataterm
     /// close to -1. Positive data term means bad shape.

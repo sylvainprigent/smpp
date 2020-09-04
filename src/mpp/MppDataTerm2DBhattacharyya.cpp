@@ -31,6 +31,10 @@ void MppDataTerm2DBhattacharyya::set_width(int value){
     m_width = value;   
 }
 
+void MppDataTerm2DBhattacharyya::init(){
+
+}
+
 float MppDataTerm2DBhattacharyya::run(MppShape2D* shape, int x, int y){
 
 
