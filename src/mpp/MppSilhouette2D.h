@@ -94,6 +94,15 @@ public:
     /// \param[in] forceComputation Force the computation if true. Otherwise returns the previously computed value
     /// \returns a pointer to the list of points inside the shape
     std::vector<MppPoint2D*>* fill(bool force_computation=false);
+    /// \brief Getter for the normal vectors to the contour
+    /// \param[in] forceComputation Force the computation if true. Otherwise returns the previously computed value
+    /// \returns a pointer to the list of normal vectors
+    std::vector<MppPoint2D*>* normals(bool force_computation=false);
+
+public:
+    bool is_inside(const int & x, const int & y);
+    bool is_in_border(const int & x, const int & y);
+    void find_closest_pixels(int pos, std::vector<MppPoint2D> &neighboors);
 
 public:
     /// \brief Setter for the silhouette size
@@ -112,5 +121,6 @@ protected:
     int m_size; ///< Silhouette size
     std::vector<MppPoint2D*>* m_contour; ///< Pointer to the list of points in the silhouette contour
     std::vector<MppPoint2D*>* m_fill; ///< Pointer to the list of points inside the silhouette
+    std::vector<MppPoint2D*>* m_normals; ///< Pointer to the list of normals to the contour
     
 };

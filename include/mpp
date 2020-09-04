@@ -2,6 +2,7 @@
 #include "../src/mpp/MppAlgorithm2DSBCR.h"
 #include "../src/mpp/MppDataTerm2D.h"
 #include "../src/mpp/MppDataTerm2DBhattacharyya.h"
+#include "../src/mpp/MppDataTerm2DGradient.h"
 #include "../src/mpp/MppDictionary2D.h"
 #include "../src/mpp/MppDictionary2DCircle.h"
 #include "../src/mpp/MppDraw2D.h"

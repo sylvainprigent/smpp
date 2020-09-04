@@ -50,11 +50,15 @@ public:
     /// \param[in] forceComputation Force the computation if true. Otherwise returns the previously computed value
     /// \returns a pointer to the list of points inside the shape
     std::vector<MppPoint2D*>* fill(bool forceComputation=false);
+    /// \brief Getter for the normal vectors at the contour
+    /// \param[in] forceComputation Force the computation if true. Otherwise returns the previously computed value
+    /// \returns a pointer to the normal vectors at the contour
+    std::vector<MppPoint2D*>* normals(bool forceComputation=false);
     /// \brief Getter for the silhouette representation of the shape
     /// \param[in] forceComputation Force the computation if true. Otherwise returns the previously computed value
     /// \returns a pointer to the silhouette
     MppSilhouette2D* silhouette(bool forceComputation=false);
-
+    
 protected:
     /// \brief Do the computation of the counding box
     /// \returns the bounding box
@@ -67,6 +71,9 @@ protected:
     virtual std::vector<MppPoint2D*>* computeContour();
     /// \brief Compute the points inside the shape
     /// \return a pointer to the list of points inside the shape
+    virtual std::vector<MppPoint2D*>* computeNormals();
+    /// \brief Compute the normal vectors at the contours
+    /// \return a pointer to the list of normals vectors
     virtual std::vector<MppPoint2D*>* computeFill();
     /// \brief Compute a silhouette representation of the shape
     /// \returns a pointer to the silhouette
@@ -77,6 +84,7 @@ protected:
     int m_size; ///< Shape size
     std::vector<MppPoint2D*>* m_contour; ///< Pointer to the list of points in the shape contour
     std::vector<MppPoint2D*>* m_fill; ///< Pointer to the list of points inside the shape
+    std::vector<MppPoint2D*>* m_normals; ///< Pointer to the list of normal vectors
     MppSilhouette2D* m_silhouette; ///< Pointer to the silhouette representation of the shape
 
 };

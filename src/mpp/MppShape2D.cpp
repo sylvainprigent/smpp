@@ -63,6 +63,17 @@ std::vector<MppPoint2D*>* MppShape2D::fill(bool forceComputation){
     }
 }
 
+std::vector<MppPoint2D*>* MppShape2D::normals(bool forceComputation){
+
+    if (m_normals && !forceComputation){
+        return m_normals;
+    }
+    else{
+        m_normals = this->computeNormals();  
+        return m_normals;      
+    }
+}
+
 MppSilhouette2D* MppShape2D::silhouette(bool forceComputation){
 
     if (m_silhouette && !forceComputation){
@@ -87,6 +98,11 @@ int MppShape2D::computeSize(){
 std::vector<MppPoint2D*>* MppShape2D::computeContour(){
     this->silhouette();
     return m_silhouette->contour();
+}
+
+std::vector<MppPoint2D*>* MppShape2D::computeNormals(){
+    this->silhouette();
+    return m_silhouette->normals();
 }
 
 std::vector<MppPoint2D*>* MppShape2D::computeFill(){

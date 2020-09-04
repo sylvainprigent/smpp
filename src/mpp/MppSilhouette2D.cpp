@@ -7,6 +7,7 @@
 #include "MppSilhouette2D.h"
 
 #include <iostream>
+#include "math.h"
 
 
 MppSilhouette1D::MppSilhouette1D(){
@@ -253,6 +254,91 @@ std::vector<MppPoint2D*>* MppSilhouette2D::fill(bool force_computation){
         }
     }
     return m_fill;
+}
+
+std::vector<MppPoint2D*>* MppSilhouette2D::normals(bool force_computation){
+
+    if ( m_normals != nullptr && !force_computation){
+        return m_normals;
+    }
+
+    this->contour(1, true);
+    m_normals = new std::vector<MppPoint2D*>(m_contour->size());
+    for (int i = 0 ; i < m_contour->size() ; ++i){
+
+        // get the 2 neigbooring points
+        std::vector<MppPoint2D> neighboors;
+        this->find_closest_pixels(i, neighboors);
+
+        // calculate the normal
+        int x = neighboors[1].x() - neighboors[0].x();
+        int y = neighboors[1].y() - neighboors[0].y();
+        int norm = sqrt(x*x + y*y);
+        x /= norm;
+        y /= norm;
+
+        //std::cout << "is inside at " << i << std::endl;
+        if (this->is_inside( (*m_contour)[i]->x() -int(y+0.5), (*m_contour)[i]->y() + int(x+0.5))){
+            (*m_normals)[i] = new MppPoint2D(-y, x);
+        }
+        else{
+            (*m_normals)[i] = new MppPoint2D(y, -x);
+        }
+    }
+    return m_normals;
+}
+
+bool MppSilhouette2D::is_inside(const int & x, const int & y){
+    
+    // find common x
+    int x_min = m_lines[0]->x();
+    int x_max = m_lines[m_lines.size()-1]->x();
+
+    if ( x >= x_min && x <= x_max){
+        int pos = x - x_min;
+
+        // test all the pairs
+        for (int j = 0 ;j < m_lines[pos]->pairs() ; ++j){
+            float y1 = m_lines[pos]->pair_in_y(j);
+            float y2 = m_lines[pos]->pair_out_y(j);
+
+            if ( y1 <= y && y <= y2 ){
+                return true;
+            }
+        }
+        return false;
+    }
+    else{
+        return false;
+    }
+}
+
+void MppSilhouette2D::find_closest_pixels(int pos, std::vector<MppPoint2D> &neighboors){
+
+    MppPoint2D* ref = (*m_contour)[pos];
+    for (int x = ref->x()-1 ; x <= ref->x() +1 ; ++x){
+        for (int y = ref->y()-1 ; y <= ref->y() +1 ; ++y)
+        {
+            if ( x == ref->x() && y == ref->y() ){
+            }
+            else{
+                if (is_in_border(x, y)){
+                    neighboors.push_back(MppPoint2D(x,y));
+                }
+            }
+        }
+    }
+}
+
+bool MppSilhouette2D::is_in_border(const int & x, const int & y){
+
+    for (int i = 0 ; i < m_contour->size() ; ++i){
+        MppPoint2D* curent = (*m_contour)[i];
+        if (curent->x() == x && curent->y() == y){
+            return true;
+        }
+    }
+    return false;
 }
 
 void MppSilhouette2D::print(){

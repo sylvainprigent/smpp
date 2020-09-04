@@ -20,6 +20,7 @@ enable_testing()
 ## #################################################################
 
 set(${PROJECT_NAME}_MAIN_SOURCES
+  TestMppAlgoGrad.cpp
   TestMppInteraction2DNoOverlap.cpp
   TestMppSilhouette.cpp
   TestMppShapeCircle.cpp
@@ -28,6 +29,18 @@ set(${PROJECT_NAME}_MAIN_SOURCES
 ## ###################################################################
 ## Configure file
 ## ###################################################################
+
+if(EXISTS ${PROJECT_SOURCE_DIR}/imagesTest/cell.tif)
+  set(CELL ${PROJECT_SOURCE_DIR}/imagesTest/cell.tif)
+endif()
+
+if(EXISTS ${PROJECT_SOURCE_DIR}/imagesTest/cell_bm.tif)
+  set(CELLBM ${PROJECT_SOURCE_DIR}/imagesTest/cell_bm.tif)
+endif()
+
+if(EXISTS ${PROJECT_SOURCE_DIR}/smppTestConfig.h.in)
+  configure_file(smppTestConfig.h.in ${CMAKE_BINARY_DIR}/smppTestConfig.h)
+endif()
 
 ## #################################################################
 ## Build rules
@@ -39,7 +52,7 @@ foreach (test ${${PROJECT_NAME}_MAIN_SOURCES})
   get_filename_component(TName ${test} NAME_WE)
 
   add_executable(${TName} ${test})
-  target_link_libraries(${TName} smpp)
+  target_link_libraries(${TName} smpp ${SL_LIBRARIES})
 
   add_test(${TName} ${EXECUTABLE_OUTPUT_PATH}/${TName})
 
