@@ -1,8 +1,8 @@
 #include <vector>
 #include <iostream>
 
-#include <mpp/MppShapeCircle.h>
-#include <mpp/MppInteraction2DNoOverlap.h>
+#include <smpp/MppShapeCircle.h>
+#include <smpp/MppInteraction2DNoOverlap.h>
 
 int main(int argc, char* argv[])
 { 
