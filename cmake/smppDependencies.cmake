@@ -22,7 +22,7 @@ if(${smpp_USE_OPENMP})
 endif(${smpp_USE_OPENMP})  
 
 ## #################################################################
-## SImageIO needed for tool
+## SImageIO and SCmd needed for tool
 ## #################################################################
 if (${smpp_BUILD_TOOLS})
   find_package (simageio REQUIRED)
@@ -36,6 +36,18 @@ if (${smpp_BUILD_TOOLS})
   else( simageio_FOUND )
     message(STATUS "NOT Using SImageIO")
   endif( simageio_FOUND )
+
+  find_package (scmd REQUIRED)
+  if ( scmd_FOUND )
+    message(STATUS "Using SCmd")
+    set (SL_INCLUDE_DIRS ${SL_INCLUDE_DIRS} ${scmd_INCLUDE_DIRS})
+    set (SL_LIBRARY_DIRS ${SL_LIBRARY_DIRS} ${scmd_LIBRARY_DIRS})
+    set (SL_LIBRARIES ${SL_LIBRARIES} ${scmd_LIBRARIES})
+    message(STATUS "scmd_LIBRARY_DIRS=" ${scmd_LIBRARY_DIRS}) 
+    set(smpp_HAVE_SCMD 1)
+  else( scmd_FOUND )
+    message(STATUS "NOT Using SCmd")
+  endif( scmd_FOUND )
 
 
   find_package (TIFF REQUIRED)
