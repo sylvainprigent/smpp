@@ -2,13 +2,13 @@
 
 #include <smpp>
 #include <simageio>
-#include <scmd>
+#include <scli>
 
 int main(int argc, char *argv[])
 {
     try
     {
-        SCmdParser cmdParser(argc, argv);
+        SCliParser cmdParser(argc, argv);
         cmdParser.addInputData("-i", "Input image file");
         cmdParser.addOutputData("-o", "Output image file");
         cmdParser.addOutputData("-m", "Birth mask image file");
@@ -37,20 +37,17 @@ int main(int argc, char *argv[])
 
         SImageFloat* image = dynamic_cast<SImageFloat*>(SImageReader::read(inputImageFile));
 
-        std::cout << "image size = " << image->sx() << ", " << image->sy() << std::endl;
+        std::cout << "image size = " << image->getSizeX() << ", " << image->getSizeY() << std::endl;
 
-        MppImageFloat* mpp_image = new MppImageFloat(image->buffer(), image->sx(), image->sy());
-        MppDataTerm2DBhattacharyya* data_term = new MppDataTerm2DBhattacharyya(mpp_image, threshold);
+        MppDataTerm2DBhattacharyya* data_term = new MppDataTerm2DBhattacharyya(image, threshold);
         MppInteraction2DNoOverlap* interaction = new MppInteraction2DNoOverlap();
         MppDictionary2DCircle* dictionary = new MppDictionary2DCircle(rmin, rmax);
         MppAlgorithm2DSBCR* algo = new MppAlgorithm2DSBCR(data_term, interaction, dictionary);
         SImageUInt* mask = nullptr;
-        MppImageUInt* mpp_mask = nullptr;
         if (maskImageFile != ""){
             mask = dynamic_cast<SImageUInt*>(SImageReader::read(maskImageFile, 8));
-            mpp_mask = new MppImageUInt(mask->buffer(), mask->sx(), mask->sy());
-            std::cout << "mask size = " << mask->sx() << ", " << mask->sy() << std::endl;
-            algo->set_birth_mask(mpp_mask);
+            std::cout << "mask size = " << mask->getSizeX() << ", " << mask->getSizeY() << std::endl;
+            algo->set_birth_mask(mask);
         }
         algo->set_n_iter(n_iter);
         algo->run();
@@ -58,9 +55,8 @@ int main(int argc, char *argv[])
 
         std::cout << "main got " << shapes.size() << "shapes" << std::endl;
 
-        MppDraw2D drawer(mpp_image);
-        MppImageUInt* mpp_out_image = drawer.run(shapes);
-        SImageUInt* out_image = new SImageUInt(mpp_out_image->buffer(), mpp_out_image->sx(), mpp_out_image->sy(), 1, 1, 3);
+        MppDraw2D drawer(image);
+        SImageUInt* out_image = drawer.run(shapes);
         std::cout << "save image representation " << std::endl;
         SImageReader::write(out_image, outputImageFile);
 
@@ -76,7 +72,7 @@ int main(int argc, char *argv[])
         delete out_image;
         return 0;
     }
-    catch (SCmdException &e)
+    catch (SCliException &e)
     {
         std::cout << e.what() << std::endl;
     }

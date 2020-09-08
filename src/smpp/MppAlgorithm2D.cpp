@@ -34,13 +34,13 @@ MppAlgorithm2D::~MppAlgorithm2D()
     }
 }
 
-void MppAlgorithm2D::set_birth_mask(MppImageUInt* mask){
+void MppAlgorithm2D::set_birth_mask(SImageUInt* mask){
     m_use_mask = true;
-    unsigned int* buffer = mask->buffer();
+    unsigned int* buffer = mask->getBuffer();
     m_birth_mask.clear();
-    for (int x = 0 ; x < mask->sx() ; x++){
-        for (int y = 0 ; y < mask->sy() ; y++){
-            if (buffer[mask->sy()*x+y] == 255){
+    for (int x = 0 ; x < mask->getSizeX() ; x++){
+        for (int y = 0 ; y < mask->getSizeY() ; y++){
+            if (buffer[mask->getSizeY()*x+y] == 255){
                 m_birth_mask.push_back(new MppPoint2D(x, y));        
             }
         }

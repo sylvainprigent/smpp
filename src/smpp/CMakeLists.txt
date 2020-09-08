@@ -26,7 +26,6 @@ SET(SRC_FILES
   MppDictionary2D.cpp
   MppDictionary2DCircle.cpp
   MppDraw2D.cpp
-  MppImage.cpp
   MppInteraction2D.cpp
   MppInteraction2DNoOverlap.cpp
   MppPoint.cpp
@@ -47,7 +46,6 @@ SET(HEADERS_FILES
   MppDictionary2D.h
   MppDictionary2DCircle.h
   MppDraw2D.h
-  MppImage.h
   MppInteraction2D.h
   MppInteraction2DNoOverlap.h
   MppPoint.h

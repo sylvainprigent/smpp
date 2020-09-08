@@ -7,7 +7,6 @@
 #include "../src/smpp/MppDictionary2D.h"
 #include "../src/smpp/MppDictionary2DCircle.h"
 #include "../src/smpp/MppDraw2D.h"
-#include "../src/smpp/MppImage.h"
 #include "../src/smpp/MppInteraction2D.h"
 #include "../src/smpp/MppInteraction2DNoOverlap.h"
 #include "../src/smpp/MppRand.h"

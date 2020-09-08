@@ -22,9 +22,37 @@ if(${smpp_USE_OPENMP})
 endif(${smpp_USE_OPENMP})  
 
 ## #################################################################
-## SImageIO and SCmd needed for tool
+## SImage
+## #################################################################
+find_package (simage REQUIRED)
+if ( simage_FOUND )
+  message(STATUS "Using simage")
+  set (SL_INCLUDE_DIRS ${SL_INCLUDE_DIRS} ${simage_INCLUDE_DIRS})
+  set (SL_LIBRARY_DIRS ${SL_LIBRARY_DIRS} ${simage_LIBRARY_DIRS})
+  set (SL_LIBRARIES ${SL_LIBRARIES} ${simage_LIBRARIES})
+  message(STATUS "simage_LIBRARY_DIRS=" ${simage_LIBRARY_DIRS}) 
+  set(smpp_HAVE_simage 1)
+else( simage_FOUND )
+  message(STATUS "NOT Using simage")
+endif( simage_FOUND )
+
+## #################################################################
+## SImageIO and scli needed for tool
 ## #################################################################
 if (${smpp_BUILD_TOOLS})
+
+  find_package (score REQUIRED)
+  if ( score_FOUND )
+    message(STATUS "Using score")
+    set (SL_INCLUDE_DIRS ${SL_INCLUDE_DIRS} ${score_INCLUDE_DIRS})
+    set (SL_LIBRARY_DIRS ${SL_LIBRARY_DIRS} ${score_LIBRARY_DIRS})
+    set (SL_LIBRARIES ${SL_LIBRARIES} ${score_LIBRARIES})
+    message(STATUS "score_LIBRARY_DIRS=" ${score_LIBRARY_DIRS}) 
+    set(smpp_HAVE_score 1)
+  else( score_FOUND )
+    message(STATUS "NOT Using score")
+  endif( score_FOUND )
+
   find_package (simageio REQUIRED)
   if ( simageio_FOUND )
     message(STATUS "Using SImageIO")
@@ -37,17 +65,17 @@ if (${smpp_BUILD_TOOLS})
     message(STATUS "NOT Using SImageIO")
   endif( simageio_FOUND )
 
-  find_package (scmd REQUIRED)
-  if ( scmd_FOUND )
-    message(STATUS "Using SCmd")
-    set (SL_INCLUDE_DIRS ${SL_INCLUDE_DIRS} ${scmd_INCLUDE_DIRS})
-    set (SL_LIBRARY_DIRS ${SL_LIBRARY_DIRS} ${scmd_LIBRARY_DIRS})
-    set (SL_LIBRARIES ${SL_LIBRARIES} ${scmd_LIBRARIES})
-    message(STATUS "scmd_LIBRARY_DIRS=" ${scmd_LIBRARY_DIRS}) 
-    set(smpp_HAVE_SCMD 1)
-  else( scmd_FOUND )
-    message(STATUS "NOT Using SCmd")
-  endif( scmd_FOUND )
+  find_package (scli REQUIRED)
+  if ( scli_FOUND )
+    message(STATUS "Using scli")
+    set (SL_INCLUDE_DIRS ${SL_INCLUDE_DIRS} ${scli_INCLUDE_DIRS})
+    set (SL_LIBRARY_DIRS ${SL_LIBRARY_DIRS} ${scli_LIBRARY_DIRS})
+    set (SL_LIBRARIES ${SL_LIBRARIES} ${scli_LIBRARIES})
+    message(STATUS "scli_LIBRARY_DIRS=" ${scli_LIBRARY_DIRS}) 
+    set(smpp_HAVE_scli 1)
+  else( scli_FOUND )
+    message(STATUS "NOT Using scli")
+  endif( scli_FOUND )
 
 
   find_package (TIFF REQUIRED)

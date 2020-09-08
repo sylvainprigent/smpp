@@ -8,7 +8,7 @@
 
 #include "smppExport.h"
 #include "MppShape2D.h"
-#include "MppImage.h"
+#include "simage/SImageFloat.h"
 
 /// \class MppDataTerm2D
 /// \brief Interface for MPP data term in 2D
@@ -21,17 +21,17 @@ public:
     /// \brief Constructor
     /// \param[in] image Image where the data term is calculated
     /// \param[in] threshold Threshold to select if the data term is heigh enough to keep the shape
-    MppDataTerm2D(MppImageFloat* image, float threshold);
+    MppDataTerm2D(SImageFloat* image, float threshold);
     /// \brief Destructor
     virtual ~MppDataTerm2D();
 
 public:
     /// \brief Setter for the image pointer
     /// \param[in] image Pointer to the image
-    void set_image(MppImageFloat* image);
+    void set_image(SImageFloat* image);
     /// \brief Getter for the image pointer
     /// \returns a Pointer to the image
-    MppImageFloat* image();
+    SImageFloat* image();
 
 public:
     /// \brief Implements precalculation needed for the data term
@@ -45,7 +45,7 @@ public:
     virtual float run(MppShape2D* shape, int x, int y) = 0;
 
 protected:
-    MppImageFloat* m_image; ///< Pointer to the image
+    SImageFloat* m_image; ///< Pointer to the image
     float m_threshold; ///< Threshold to define good shapes
 
 };

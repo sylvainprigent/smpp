@@ -20,7 +20,7 @@ public:
     /// \brief Constructor
     /// \param[in] image Image where the data term is calculated
     /// \param[in] threshold Threshold to select if the data term is heigh enough to keep the shape
-    MppDataTerm2DBhattacharyya(MppImageFloat* image, float threshold);
+    MppDataTerm2DBhattacharyya(SImageFloat* image, float threshold);
     /// \brief Destructor
     virtual ~MppDataTerm2DBhattacharyya();
 

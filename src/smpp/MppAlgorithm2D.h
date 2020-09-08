@@ -14,6 +14,8 @@
 #include "MppInteraction2D.h"
 #include "MppDictionary2D.h"
 
+#include "simage/SImageUInt.h"
+
 
 /// \class MppAlgorithm2D
 /// \brief Interface for MPP algorithm 2D case
@@ -37,7 +39,7 @@ public:
     /// \brief Setter for birth mask optional parameter.
     ///  if the birth mask is set, objects can be created only at locations where mask=255
     /// \param[in] mask Pointer to the mask image
-    void set_birth_mask(MppImageUInt* mask);
+    void set_birth_mask(SImageUInt* mask);
 
 public:
     /// \brief Method that implement shape detection algorithm

@@ -16,7 +16,7 @@ MppDataTerm2DGradientNorm::MppDataTerm2DGradientNorm(float threshold) : MppDataT
     m_epsilon = 0.000001;
 }
 
-MppDataTerm2DGradientNorm::MppDataTerm2DGradientNorm(MppImageFloat* image, float threshold) : MppDataTerm2D(image, threshold){
+MppDataTerm2DGradientNorm::MppDataTerm2DGradientNorm(SImageFloat* image, float threshold) : MppDataTerm2D(image, threshold){
     m_D = 100.0; 
     m_grad_image_x = nullptr;
     m_grad_image_y = nullptr; 
@@ -34,8 +34,8 @@ void MppDataTerm2DGradientNorm::set_D(float value){
 
 void MppDataTerm2DGradientNorm::init(){
 
-    unsigned int sx = m_image->sx();
-    unsigned int sy = m_image->sy();
+    unsigned int sx = m_image->getSizeX();
+    unsigned int sy = m_image->getSizeY();
     m_grad_image_x = new float[sx*sy];
     m_grad_image_y = new float[sx*sy];
 
@@ -54,7 +54,7 @@ void MppDataTerm2DGradientNorm::init(){
     }
 
     // gradient
-    float *image_buffer = m_image->buffer();
+    float *image_buffer = m_image->getBuffer();
     for (int x = 1 ; x < sx-1 ; x++){
         for (int y = 1 ; y < sy-1 ; y++){
             m_grad_image_x[sy*x+y] = pow(image_buffer[sy*(x+1)+y] - image_buffer[sy*(x-1)+y],2);
@@ -71,20 +71,20 @@ float MppDataTerm2DGradientNorm::run(MppShape2D* shape, int x, int y){
     if (box[0] - 1 + x < 1){
         return 1;
     }
-    if (x + box[1] + 1 >= m_image->sx()-1){
+    if (x + box[1] + 1 >= m_image->getSizeX()-1){
         return 1;
     }
     if (box[2] - 1 + y < 1){
         return 1;
     }
-    if (y + box[3] + 1 >= m_image->sy()-1){
+    if (y + box[3] + 1 >= m_image->getSizeY()-1){
         return 1;
     }
 
     // calculate gradient
     std::vector<MppPoint2D*>* contour = shape->contour();
     std::vector<MppPoint2D*>* normals = shape->normals();
-    int sy = m_image->sy();
+    int sy = m_image->getSizeY();
     float U = 0;
     float grad_x, grad_y;
     float nx, ny;

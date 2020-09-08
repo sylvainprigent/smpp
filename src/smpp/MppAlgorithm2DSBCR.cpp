@@ -13,15 +13,15 @@ MppAlgorithm2DSBCR::MppAlgorithm2DSBCR(MppDataTerm2D* data_term, MppInteraction2
 : MppAlgorithm2D(data_term, interaction, dictionary)
 {
     m_n_iter = 1000;
-    m_image_sx = m_data_term->image()->sx();
-    m_image_sy = m_data_term->image()->sy();
+    m_image_sx = m_data_term->image()->getSizeX();
+    m_image_sy = m_data_term->image()->getSizeY();
 }
 MppAlgorithm2DSBCR::MppAlgorithm2DSBCR(MppDataTerm2D* data_term, MppInteraction2D* interaction, std::vector<MppShape2D*>* dictionary)
 : MppAlgorithm2D(data_term, interaction, dictionary)
 {
     m_n_iter = 1000;
-    m_image_sx = m_data_term->image()->sx();
-    m_image_sy = m_data_term->image()->sy();
+    m_image_sx = m_data_term->image()->getSizeX();
+    m_image_sy = m_data_term->image()->getSizeY();
 }
 
 MppAlgorithm2DSBCR::~MppAlgorithm2DSBCR()

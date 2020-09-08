@@ -14,7 +14,7 @@ MppDataTerm2DBhattacharyya::MppDataTerm2DBhattacharyya(float threshold) : MppDat
     m_width = 1;
 }
 
-MppDataTerm2DBhattacharyya::MppDataTerm2DBhattacharyya(MppImageFloat* image, float threshold) : MppDataTerm2D(image, threshold){
+MppDataTerm2DBhattacharyya::MppDataTerm2DBhattacharyya(SImageFloat* image, float threshold) : MppDataTerm2D(image, threshold){
     m_max_distance = 100.0; 
     m_width = 1;    
 }
@@ -45,7 +45,7 @@ float MppDataTerm2DBhattacharyya::run(MppShape2D* shape, int x, int y){
         //std::cout << "dataterm out of bound:" << x << ", " << y << ", 1:" << box[0] - m_width + x << std::endl;
         return 1;
     }
-    if (x + box[1] + m_width >= m_image->sx()){
+    if (x + box[1] + m_width >= m_image->getSizeX()){
         //std::cout << "dataterm out of bound:" << x << ", " << y << ", 2:" << x + box[1] + m_width << std::endl;
         return 1;
     }
@@ -53,7 +53,7 @@ float MppDataTerm2DBhattacharyya::run(MppShape2D* shape, int x, int y){
         //std::cout << "dataterm out of bound:" << x << ", " << y << ", 3:" << box[2] - m_width + y << std::endl;
         return 1;
     }
-    if (y + box[3] + m_width >= m_image->sy()){
+    if (y + box[3] + m_width >= m_image->getSizeY()){
         //std::cout << "dataterm out of bound:" << x << ", " << y << ", 4:" << y + box[3] + m_width << std::endl;
         return 1;
     }
@@ -65,9 +65,9 @@ float MppDataTerm2DBhattacharyya::run(MppShape2D* shape, int x, int y){
     float mean_fill = 0.0;
     float var_fill = 0.0;
     int fill_size = fill->size();
-    float * buffer = m_image->buffer();
+    float * buffer = m_image->getBuffer();
     for (int i = 0 ; i < fill_size ; i++){
-        val = buffer[ m_image->sx()*((*fill)[i]->x() + x) + ((*fill)[i]->y() + y)];
+        val = buffer[ m_image->getSizeX()*((*fill)[i]->x() + x) + ((*fill)[i]->y() + y)];
         mean_fill += val;
         var_fill += val*val;
     }
@@ -80,7 +80,7 @@ float MppDataTerm2DBhattacharyya::run(MppShape2D* shape, int x, int y){
     float var_contour = 0.0;
     int size_contour = contour->size();
     for (int i = 0 ; i < size_contour ; i++){
-        val = buffer[m_image->sx()*((*contour)[i]->x() + x) + (*contour)[i]->y() + y];
+        val = buffer[m_image->getSizeX()*((*contour)[i]->x() + x) + (*contour)[i]->y() + y];
         mean_contour += val;
         var_contour += val*val;
     }
