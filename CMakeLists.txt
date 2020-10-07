@@ -43,9 +43,9 @@ set(smppProject_USE_DOXYGEN 0)
 ## OpemMP option
 ## #################################################################
 option(smpp_USE_OPENMP "use OpenMP" OFF)
-if (smpp_USE_OPENMP)
-    add_compile_definitions(SMPPUSEOPENMP)
-endif(smpp_USE_OPENMP)
+if (SL_USE_OPENMP)
+    add_compile_definitions(SL_USE_OPENMP)
+endif(SL_USE_OPENMP)
 
 include(smppDependencies)
 
